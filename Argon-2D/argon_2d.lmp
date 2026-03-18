@@ -1,0 +1,34 @@
+#Initialization
+
+units lj # Lennard-Jones
+dimension 2 # 2D 
+atom_style atomic
+boundary p p p #periodic
+
+#System definition
+region simbox block -20 20 -20 20 -0.5 0.5 #Shrunk length of Z range
+create_box 1 simbox # 1 type
+lattice sq 0.8      
+
+create_atoms 1 random 50 43210 simbox overlap 1.0 # Places Ar atoms randomly (seed 43210)
+
+
+#Settings
+mass 1 1.0 # Mass of atom 1 in LJ units
+pair_style lj/cut 2.5 # LJ potential + 2.5*sigma cutoff 
+pair_coeff 1 1 1.0 1.0 # Sets LJ values epsilon=1, sigma=1
+
+#Monitoring
+thermo 200 # print thermo data every 200 timesteps
+thermo_style custom step temp etotal pe ke press # Gives info timestep, temperature, energu, pe, ke
+minimize 1e-4 1e-6 100 1000
+
+dump traj all atom 100 dump_argon_2d.lammpstrj # write trajectory every 100 steps
+
+#Run
+velocity all create 10.0 54321 #Maxwell–Boltzmann distribution (Target temp (KE)) (seed = 54321)
+fix mynve all nve # integrate motion using Newton's equations
+fix mylgv all langevin 1.0 1.0 0.1 10917 # Langevin thermostat to maintain temperature 1
+fix all all enforce2d
+timestep 0.01
+run 20000
