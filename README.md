@@ -1,3 +1,9 @@
-<video src="https://github.com/ahajtamim/Argon-Gas-Simulations/blob/main/Media/argon_2d.mp4" controls loop muted width="600"></video>
+# Argon Gas Simulations
 
-<video src="Media/argon_3d.mp4" controls autoplay loop muted width="600"></video>
+## 2D
+
+https://github.com/user-attachments/assets/78f848d5-a313-4eeb-b5fb-8918e1e1e51b
+
+
+
+https://github.com/user-attachments/assets/8d121b3f-d815-4511-b292-41061b85b177
